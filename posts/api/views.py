@@ -12,7 +12,7 @@ from posts.api.serializers import PostSerializer
 
 
 class PostModelViewSet(ModelViewSet):
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = []
     serializer_class = PostSerializer
     queryset = Post.objects.all()
 
@@ -24,7 +24,6 @@ class PostModelViewSet(ModelViewSet):
 #     serializer = PostSerializer(posts, many=True)
 #     return Response(status=status.HTTP_200_OK, data=serializer.data)
 
-# MANERA CON CLASE API VIEW
 # @api_view(['POST'])
 # def storePost(request):
 #     serializer = PostSerializer(data=json.loads(request.body))
@@ -89,3 +88,4 @@ class PostModelViewSet(ModelViewSet):
 #         post.delete()
 #         post = PostSerializer(post)
 #         return Response(status=status.HTTP_200_OK, data=post.data)
+
