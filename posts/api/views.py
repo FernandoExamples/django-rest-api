@@ -5,8 +5,17 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet, ModelViewSet
 from posts.models import Post
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
+from posts.api.permissions import IsAdminOrReadOnly
 
 from posts.api.serializers import PostSerializer
+
+
+class PostModelViewSet(ModelViewSet):
+    permission_classes = [IsAdminOrReadOnly]
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
+
 
 # MANERA CON ACCIONES
 # @api_view(['GET'])
@@ -80,8 +89,3 @@ from posts.api.serializers import PostSerializer
 #         post.delete()
 #         post = PostSerializer(post)
 #         return Response(status=status.HTTP_200_OK, data=post.data)
-
-
-class PostModelViewSet(ModelViewSet):
-    serializer_class = PostSerializer
-    queryset = Post.objects.all()
